@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:record_mp3/record_mp3.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,14 +16,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
+  MyHomePage({super.key, required this.title});
+  int _index = 0;
   final String title;
 
   @override
@@ -37,13 +38,19 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: ListView.builder(
-        itemCount: 4,
+        itemCount: widget._index,
         itemBuilder: (context, index) => ListTile(
           tileColor: Colors.grey,
           leading: Text("$index"),
           trailing: const Icon(Icons.mic),
           minVerticalPadding: 12.0,
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => setState(() {
+          // widget._index++;
+          //onCreateDialog().showDialog()
+        }),
       ),
     );
   }
