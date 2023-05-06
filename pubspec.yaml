@@ -39,6 +39,7 @@ dependencies:
   flutter_clean_architecture: ^5.0.4
   bloc: ^8.1.1
   permission_handler: ^10.2.0
+  path_provider: ^2.0.14
 
 dev_dependencies:
   flutter_test:
