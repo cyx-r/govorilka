@@ -55,7 +55,7 @@ class RecordingService {
   Future<bool> _checkPermission() async {
     if (!await Permission.microphone.isGranted) {
       PermissionStatus status = await Permission.microphone.request();
-      if (status == PermissionStatus.granted) {
+      if (status.isGranted) {
         return true;
       }
     }
