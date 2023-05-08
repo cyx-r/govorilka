@@ -28,7 +28,7 @@ class RecordingService {
     isRecording = false;
     recorder.stopRecorder();
     var url = await recorder.stopRecorder().then((value) => value);
-    await recorder.closeRecorder();
+    //recorder.closeRecorder();
     submitRecord(url);
   }
 

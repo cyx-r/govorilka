@@ -7,8 +7,6 @@ class MyHomePage extends StatefulWidget {
   MyHomePage({
     super.key,
   });
-  int _index = 0;
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -18,6 +16,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     var recorder = FlutterSoundRecorder();
     RecordingService recorderService = RecordingService(context, recorder);
+    bool isRecording = false;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 238, 61, 61),
@@ -31,9 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
               heroTag: 'btn1',
               onPressed: () {
                 setState(() {
-                  if (recorder.isRecording) {
-                    recorderService.stopRecord();
-                  }
+                  isRecording = false;
+                  recorderService.stopRecord();
                 });
               },
               backgroundColor: Colors.grey,
@@ -44,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
               heroTag: 'btn2',
               onPressed: () {
                 setState(() {
+                  isRecording = true;
                   recorderService.startRecord();
                 });
               },
