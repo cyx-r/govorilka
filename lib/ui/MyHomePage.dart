@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 import 'package:govorilka/service/RecordingService.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -15,31 +16,39 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    RecordingService recorderService = RecordingService(context);
-    Permission.microphone.request();
+    var recorder = FlutterSoundRecorder();
+    RecordingService recorderService = RecordingService(context, recorder);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 238, 61, 61),
         title: const Text('Speech recorder'),
       ),
       body: Center(
-        child: Column(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Try to record your speech'),
-            Expanded(
-              child: FloatingActionButton(
-                onPressed: () {
-                  setState(() {
-                    recorderService.isRecording
-                        ? recorderService.stopRecord()
-                        : recorderService.startrecord();
-                  });
-                },
-                backgroundColor: const Color.fromARGB(255, 236, 85, 85),
-                child: Icon(
-                  recorderService.isRecording ? Icons.pause : Icons.play_arrow,
-                ),
-              ),
+            FloatingActionButton.large(
+              heroTag: 'btn1',
+              onPressed: () {
+                setState(() {
+                  if (recorder.isRecording) {
+                    recorderService.stopRecord();
+                  }
+                });
+              },
+              backgroundColor: Colors.grey,
+              child: const Icon(Icons.pause),
+            ),
+            const Divider(thickness: 12,),
+            FloatingActionButton.large(
+              heroTag: 'btn2',
+              onPressed: () {
+                setState(() {
+                  recorderService.startRecord();
+                });
+              },
+              backgroundColor: const Color.fromARGB(255, 236, 85, 85),
+              child: const Icon(Icons.play_arrow),
             ),
           ],
         ),
