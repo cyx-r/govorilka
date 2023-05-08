@@ -6,7 +6,7 @@ import 'package:govorilka/service/RecordingService.dart';
 class CustomComponents {
   Widget customDialog(BuildContext context, dynamic url) {
     return AlertDialog(
-      content: Text('ima savin?'),
+      content: Text('Save this Record?'),
       actions: <Widget>[
         ElevatedButton(
           style: const ButtonStyle(
